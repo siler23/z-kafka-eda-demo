@@ -1,0 +1,11 @@
+---
+- name: say thanks
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - debug:
+        msg: "Thank you, z/OS lover!"
+      when: '"z/OS" in ({{ ansible_eda.event.message }} | default("Linux on Z"))'
+    - debug:
+        msg: "Thank you!"
+      when: '"z/OS" not in ({{ ansible_eda.event.message }} | default("Linux on Z"))'

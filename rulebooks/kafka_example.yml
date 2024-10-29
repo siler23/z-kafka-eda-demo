@@ -1,0 +1,19 @@
+---
+- name: Read messages from a kafka topic and act on them
+  hosts: all
+  ## Define our source for events
+  sources:   
+    - ansible.eda.kafka:
+        host: eda-demo-kafka-brokers.openshift-operators.svc.cluster.local
+        port: 9092
+        topic: eda-z-topic
+        group_id:
+
+  ## Define the conditions we are looking for
+  rules:
+    - name: Welcome to Ansible on z/OS
+      condition: event.message == "Ansible on z/OS is cool"
+      ## Define the action we should take should the condition be met
+      action:
+        run_playbook:
+          name: say_what_zos.yml

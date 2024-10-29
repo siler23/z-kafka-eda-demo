@@ -1,6 +1,6 @@
 ---
 - name: Read messages from a kafka topic and act on them
-  hosts: all
+  hosts: localhost
   ## Define our source for events
   sources:   
     - ansible.eda.kafka:
